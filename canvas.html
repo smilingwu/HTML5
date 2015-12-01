@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 使用html5垫片 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <script src="js/excanvas.js"></script>
+    <![endif]-->
+    <!-- <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script> -->
+    <style>
+        canvas {border:1px dashed #ccc;}
+    </style>
+</head>
+<body>
+
+        <div class="container">
+
+        <div class="page-header">
+            <h1>矩形</h1>
+        </div>
+        <canvas id="myCanvas" width="1024" height="150">您的浏览器不支持 HTML5 canvas 标签。</canvas>
+        <script type="text/javascript">
+            var c=document.getElementById("myCanvas");
+            var cxt=c.getContext("2d");
+            cxt.fillStyle="orange";
+            cxt.fillRect(0,0,1024,75);/*长：1024，宽：75*/
+
+            cxt.fillStyle="rgba(250,58,65,0.2)";
+            cxt.fillRect(0,50,1024,150);
+        </script>
+
+        <div class="page-header">
+            <h1>线条</h1>
+        </div>
+        <canvas id="line" width="1024" height="150"></canvas>
+        <script type="text/javascript">
+            var c=document.getElementById("line");
+            var ctx=c.getContext("2d");
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "#169fe6";
+            // ctx.lineCap = "round";/*square,默认butt*/
+            ctx.moveTo(50,50);
+            ctx.lineTo(574,50);
+            ctx.stroke();
+
+            // 绘制第二条直线
+            ctx.beginPath();
+            ctx.moveTo(50,75);
+            ctx.lineTo(574,75);
+            ctx.lineCap = "square";
+            ctx.stroke();
+
+            // 绘制第三条直线
+            ctx.beginPath();
+            ctx.moveTo(50,100);
+            ctx.lineTo(574,100);
+            ctx.lineCap = "round";
+            ctx.stroke();
+
+            // 绘制红心空心三角形
+            ctx.beginPath();
+            ctx.moveTo(774,20);
+            ctx.lineTo(974,100);
+            ctx.lineTo(674,120);
+            // ctx.lineTo(774,20);
+            //自动闭合，无需画最后一条线
+            ctx.closePath();
+
+            // 先填充形状，以免轮廓线被填充色覆盖
+            ctx.fillStyle = "#169fe6";
+            ctx.fill();
+
+            // 在绘制轮廓
+            ctx.strokeStyle = "orange";
+            ctx.lineWidth = 20;
+            ctx.lineJoin = "round";/*圆头：round,锐角斜接：mitre,平头斜接：bevel*/
+            ctx.stroke();
+        </script>
+
+        <div class="page-header">
+            <h1>曲线</h1>
+        </div>
+        <canvas id="circle" width="1024" height="150"></canvas>
+        <script type="text/javascript">
+            var c=document.getElementById("circle");
+            var ctx=c.getContext("2d");
+
+            // 绘制一个圆
+            var centerX = 120;
+            var centerY = 75;
+            var radius = 60;
+            var startingAngle = 0 * Math.PI;
+            var endingAngle = 2 * Math.PI;
+
+            ctx.beginPath();
+            ctx.arc(centerX,centerY,radius,startingAngle,endingAngle);
+            ctx.stroke();
+
+            // 绘制一个封闭的小半圆
+            ctx.beginPath();
+            ctx.arc(300,75,60,1*Math.PI,2*Math.PI);
+            ctx.closePath();
+            ctx.stroke();
+
+            // 绘制一条贝塞尔曲线
+            ctx.beginPath();
+            ctx.moveTo(450,50);
+            var control1_x = 300;
+            var control1_y = 50;
+            var control2_x = 1000;
+            var control2_y = 150;
+            var endPointX = 500;
+            var endPointY = 20;
+            ctx.bezierCurveTo(control1_x,control2_y,control2_x,control2_y,endPointX,endPointY);
+            ctx.stroke();
+        </script>
+
+        <canvas id="a" width="1024" height="150"></canvas>
+        <script type="text/javascript">
+            var c=document.getElementById("a");
+            var ctx=c.getContext("2d");
+            ctx.beginPath();
+            ctx.moveTo(25, 100);
+            ctx.quadraticCurveTo(512, 0, 999, 100);
+            ctx.lineWidth = 10;
+            // line color
+            ctx.strokeStyle = 'orange';
+            ctx.stroke();
+        </script>
+
+        <div class="page-header">
+            <h1>变换</h1>
+        </div>
+        <canvas id="translate" width="1024" height="150"></canvas>
+        <script type="text/javascript">
+            var c=document.getElementById("translate");
+            var ctx=c.getContext("2d");
+
+            // 绘制一个矩形
+            ctx.rect(20,20,100,110);
+
+            // 向右平移
+            ctx.translate(120,0);
+            ctx.rect(20,20,100,110);
+            // 再向右平移
+            ctx.translate(120,0);
+            ctx.rect(20,20,100,110);
+
+            ctx.stroke();
+        </script>
+
+        <canvas id="rotate" width="1024" height="200"></canvas>
+        <script type="text/javascript">
+            var c=document.getElementById("rotate");
+            var ctx=c.getContext("2d");
+
+            ctx.translate(100,100);
+            var copies = 10;
+            for (var i = 1; i<copies; i++) {
+                ctx.rotate(2*Math.PI*1/(copies-1));
+                ctx.rect(0,0,60,60);
+            };
+            ctx.stroke();
+        </script>
+
+        <div class="page-header">
+            <h1>透明：globalAlpha</h1>
+        </div>
+        <canvas id="globalAlpha" width="1024" height="150"></canvas>
+        <script type="text/javascript">
+            var c=document.getElementById("globalAlpha");
+            var ctx=c.getContext("2d");
+
+            ctx.globalAlpha = 0.5;
+
+            // 绘制红心空心三角形
+            ctx.beginPath();
+            ctx.moveTo(54,20);
+            ctx.lineTo(500,130);
+            ctx.lineTo(1000,70);
+            ctx.closePath();
+
+            // 先填充形状，以免轮廓线被填充色覆盖
+            ctx.fillStyle = "#169fe6";
+            ctx.fill();
+            // 在绘制轮廓
+            ctx.strokeStyle = "orange";
+            ctx.lineWidth = 20;
+            ctx.lineJoin = "mitre";
+            ctx.stroke();
+        </script>
+
+        <div class="page-header">
+            <h1>合成操作：globalCompositeOperation</h1>
+        </div>
+        <canvas id="globalCompositeOperation" width="1024" height="200"></canvas>
+        <script type="text/javascript">
+            var c=document.getElementById("globalCompositeOperation");
+            var ctx=c.getContext("2d");
+            // 全局声明
+            ctx.globalCompositeOperation = "xor";
+
+            ctx.fillStyle = "blue";
+            ctx.fillRect(15,15,120,120);
+
+
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.arc(120,120,65,0,Math.PI*2,true);
+
+            // 合成操作如下：
+            // source-over
+            // source-in
+            // source-out
+            // source-atop
+            // destination-over
+            // sestination-in
+            // destination-out
+            // destination-atop
+            // lighter
+            // copy
+            // xor
+
+            // 局部声明
+            // ctx.globalCompositeOperation = "source-atop";
+            ctx.fill();
+        </script>
+
+        <div class="page-header">
+            <h1>渐变</h1>
+        </div>
+        <canvas id="b" width="1024" height="150">您的浏览器不支持 HTML5 canvas 标签。</canvas>
+        <script>
+            var c=document.getElementById("b");
+            var ctx=c.getContext("2d");
+            // Create gradient
+            var grd=ctx.createLinearGradient(0,0,800,0);
+            grd.addColorStop(0,"orange");
+            grd.addColorStop(1,"white");
+            // Fill with gradient
+            ctx.fillStyle=grd;
+            ctx.fillRect(10,10,1000,130);
+        </script>
+
+        <canvas id="b_2" width="1024" height="150"></canvas>
+        <script>
+            var oC = document.getElementById('b_2');
+            var oGC = oC.getContext('2d');
+
+            var obj = oGC.createRadialGradient(150, 150, 100, 150, 150, 150);
+
+            obj.addColorStop(0, 'red');
+            obj.addColorStop(0.5, 'yellow');
+            obj.addColorStop(1, 'blue');
+
+            oGC.fillStyle = obj;
+
+            oGC.fillRect(0, 0, oC.width, oC.height);
+        </script>
+
+        <div class="page-header">
+            <h1>绘制图像，裁剪，切割和伸缩图像<small>与绘制文本冲突</small></h1>
+        </div>
+        <!-- 方法一 -->
+        <img id="scream" src="images/img_the_scream.jpg" alt="The Scream" width="0" height="0">
+        <canvas id="drawImage_0" width="1024" height="300"></canvas>
+        <script>
+            var c=document.getElementById("drawImage_0");
+            var ctx=c.getContext("2d");
+            var img=document.getElementById("scream");
+            ctx.drawImage(img,10,10);
+        </script>
+
+        <!-- 方法二 -->
+        <!-- <canvas id="drawImage_1" width="1024" height="300"></canvas>
+        <script>
+            var c=document.getElementById("drawImage_1");
+            var ctx=c.getContext("2d");
+
+            var img = new Image();
+            img.onload = function(){
+                // ctx.drawImage(img,10,10);
+                // 伸缩
+                ctx.drawImage(img,10,10,1000,280);
+                // 裁剪
+                // ctx.drawImage(img,0,0,200,100,10,10,220,100);
+            }
+            img.src = "images/img_the_scream.jpg";
+        </script> -->
+
+        <div class="page-header">
+            <h1>绘制文本</h1>
+        </div>
+        <canvas id="strokeText" width="1024" height="150"></canvas>
+        <script>
+            var c=document.getElementById("strokeText");
+            var ctx=c.getContext("2d");
+
+            ctx.font = "bold 40px Arial,sans-serif";
+            ctx.textBaseline = "top";
+            ctx.fillStyle = "orange";
+            ctx.fillText("I'm stuck in a canvas. Someone let me out !",10 ,10);
+
+            ctx.lineWidth = "1";
+            ctx.strokeStyle = "black";
+            ctx.strokeText("I'm stuck in a canvas. Someone let me out !",10 ,10);
+
+            ctx.font = "bold 60px Verdana,sans-serif";
+            ctx.lineWidth = "1";
+            ctx.strokeStyle = "red";
+            ctx.strokeText("I'm an outline !",10,80);
+        </script>
+
+        <div class="page-header">
+            <h1>阴影与填充</h1>
+        </div>
+        <canvas id="shadow" width="1024" height="400"></canvas>
+        <script>
+            var c=document.getElementById("shadow");
+            var ctx=c.getContext("2d");
+
+            // 绘制矩形阴影
+            ctx.rect(20,20,500,100);
+            ctx.fillStyle = "#86d6ff";
+            ctx.shadowColor = "#bbb";
+            ctx.shadowBlur = 20;
+            ctx .shadowOffsetX = 15;
+            ctx .shadowOffsetY = 15;
+            ctx.fill();
+
+            // 绘制星形阴影
+            // ctx.shadowOffsetX = 10;
+            // ctx.shadowOffsetY = 10;
+            // ctx.shadowBlur = 4;
+            // img = document.getElementById('star');
+            // ctx.drawImage(img,250,30);
+            // ctx.textBaseline = "top";
+            // ctx.font = "bold 20px Arial";
+
+            // 绘制三行文本的阴影
+            ctx.font = "bold 40px Arial,sans-serif";
+            ctx.textBaseline = "top";
+            ctx.shadowBlur = 3;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.shadowColor="black";
+            ctx.fillStyle = "blue";
+            ctx.fillText("This is a subtle,slighty old-fashioned shadow.",20,150);
+
+            ctx.shadowBlur=5;
+            ctx.shadowOffsetX=20;
+            ctx.shadowOffsetY=20;
+            ctx.fillStyle="green";
+            ctx.fillText("This is a subtle,slighty old-fashioned shadow.",20,220);
+
+            ctx.shadowBlur=15;
+            ctx.shadowOffsetX=0;
+            ctx.shadowOffsetY=0;
+            ctx.shadowColor="black";
+            ctx.fillStyle="white";
+            ctx.fillText("This is a subtle,slighty old-fashioned shadow.",20,300);
+        </script>
+
+        <div class="page-header">
+            <h1>填充图案</h1>
+        </div>
+        <canvas id="img" width="1024" height="300"></canvas>
+        <script>
+        window.onload = function() {
+            var c = document.getElementById('img');
+            var ctx = c.getContext('2d');
+
+            var yImg = new Image();
+
+            yImg.onload = function() {
+                draw(this);
+            };
+
+            yImg.src = 'images/img.png';
+
+            function draw(obj) {
+
+                var bg = ctx.createPattern(obj, 'repeat');
+
+                ctx.fillStyle = bg;
+
+                ctx.fillRect(0, 0, 1024, 300);
+
+            }
+
+        };
+        </script>
+
+    </div>
+</body>
+</html>

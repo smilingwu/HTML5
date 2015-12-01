@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>modernizr</title>
+    <link rel="stylesheet" href="css/style.min.css">
+    <script src="farmwork/modernizr/modernizr-custom.js"></script>
+</head>
+<body>
+    <script>
+        // falsh
+        Modernizr.on('flash', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has flash</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have flash</span><br>');
+          }
+        });
+
+        // canvas
+        Modernizr.on('canvas', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has canvas</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have canvas</span><br>');
+          }
+        });
+
+        // svg
+        Modernizr.on('svg', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has svg</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have svg</span><br>');
+          }
+        });
+
+        // placeholder
+        Modernizr.on('placeholder', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has placeholder</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have placeholder</span><br>');
+          }
+        });
+
+        // geolocation
+        Modernizr.on('geolocation', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has geolocation</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have geolocation</span><br>');
+          }
+        });
+
+        // boxsizing
+        Modernizr.on('boxsizing', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has boxsizing</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have boxsizing</span><br>');
+          }
+        });
+
+        // touchevents
+        Modernizr.on('touchevents', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has touchevents</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have touchevents</span><br>');
+          }
+        });
+
+        // audio
+        Modernizr.on('audio', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has audio</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have audio</span><br>');
+          }
+        });
+
+        // cookies
+        Modernizr.on('cookies', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has cookies</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have cookies</span><br>');
+          }
+        });
+
+        // fullscreen
+        Modernizr.on('fullscreen', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has fullscreen</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have fullscreen</span><br>');
+          }
+        });
+
+        // history
+        Modernizr.on('history', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has history</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have history</span><br>');
+          }
+        });
+
+        // input
+        Modernizr.on('input', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has input</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have input</span><br>');
+          }
+        });
+
+        // search
+        Modernizr.on('search', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has search</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have search</span><br>');
+          }
+        });
+
+        // inputtypes
+        Modernizr.on('inputtypes', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has inputtypes</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have inputtypes</span><br>');
+          }
+        });
+
+        // video
+        Modernizr.on('video', function( result ) {
+          if (result) {
+            document.write('<span class="success" style="color:green">the browser has video</span><br>');
+          } else {
+            document.write('<span class="error" style="color:red">the browser does not have video</span><br>');
+          }
+        });
+    </script>
+</body>
+</html>

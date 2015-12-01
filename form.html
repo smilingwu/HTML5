@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HTML5 Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+    <style>
+        .input-group {margin-bottom: 10px;}
+
+        input:required {background-color:lightyellow;}
+        /*input:required:invalid {background-color:red;}*/
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="#">
+            <legend>HTML5 Form</legend>
+            <div class="input-group">
+                <span class="input-group-addon" id="">text</span>
+                <input type="text" class="form-control" placeholder="Username" autofocus required>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">url</span>
+                <input type="url" class="form-control" required>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">email</span>
+                <input type="email" class="form-control" required multiple>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">search</span>
+                <input type="search" class="form-control" required>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">tel</span>
+                <input type="tel" class="form-control" required>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">number</span>
+                <input type="number" class="form-control" required min="0" max="100" step="10">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">range</span>
+                <input type="range" class="form-control" min="0" max="100" step="10">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">date</span>
+                <input type="date" class="form-control" min="2014-01-01" max="2015-12-31">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">time</span>
+                <input type="time" class="form-control">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">datetime-local</span>
+                <input type="datetime-local" class="form-control">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">datetime</span>
+                <input type="datetime" class="form-control">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">month</span>
+                <input type="month" class="form-control">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">week</span>
+                <input type="week" class="form-control">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="">color</span>
+                <input type="color" class="form-control">
+            </div>
+            <div class="input-group">
+                <input type="submit" class="btn btn-info btn-block" value="验证">
+            </div>
+            <div class="input-group">
+                <input type="submit" class="btn btn-info btn-block" value="绕过验证" formnovalidate>
+            </div>
+        </form>
+
+        <form action="#" novalidate>
+            <legend>novalidate</legend>
+            <div class="input-group">
+                <span class="input-group-addon" id="">novalidate</span>
+                <input type="text" class="form-control" placeholder="Username" autofocus required>
+            </div>
+            <div class="input-group">
+                <input type="submit" class="btn btn-info btn-block" value="验证">
+            </div>
+        </form>
+
+        <form action="#">
+            <legend>pattern</legend>
+            <div class="input-group">
+                <span class="input-group-addon" id="">pattern</span>
+                <input type="text" class="form-control" placeholder="[A-Z]{3}-[0-9]{3}" pattern="[A-Z]{3}-[0-9]{3}" required>
+            </div>
+            <div class="input-group">
+                <input type="submit" class="btn btn-info btn-block" value="验证">
+            </div>
+        </form>
+
+        <form action="#">
+            <legend>自定义验证</legend>
+            <div class="input-group">
+                <span class="input-group-addon" id="">*</span>
+                <textarea type="text" class="form-control" placeholder="[A-Z]{3}-[0-9]{3}" required onclick="validateComments(this)"></textarea>
+            </div>
+        </form>
+        <script>
+        function validateComments(input) {
+            if (input.value.length < 20) {
+                // input.setCustomValidaty("You need to comment in more detail.");
+            } else {
+                // input.setCustomValidaty("");
+            }
+        }
+        </script>
+
+        <form action="#">
+            <legend>type="file" multiple</legend>
+            <div class="input-group">
+                <span class="input-group-addon" id="">file</span>
+                <input type="file" class="form-control" placeholder="[A-Z]{3}-[0-9]{3}" required onclick="validateComments(this)" multiple>
+            </div>
+        </form>
+
+        <form action="#">
+            <legend>datalist</legend>
+            <div class="input-group">
+                <span class="input-group-addon" id="">datalist</span>
+                <input type="text" class="form-control" list="datalist">
+            </div>
+            <datalist id="datalist">
+                <select name="" id="">
+                    <option label="alpacs" value="alpacs">
+                    <option label="alspacs" value="alspacs">
+                    <option label="alpacas" value="alpacas">
+                    <option label="algpacs" value="algpacs">
+                    <option label="alparcs" value="alparcs">
+                    <option label="alpaocs" value="alpaocs">
+                </select>
+            </datalist>
+        </form>
+
+        <form action="#">
+            <legend>progress</legend>
+            <progress value="0.25">25%</progress>
+            <progress value="100" max="200"></progress>
+            <progress>task in progress...</progress>
+        </form>
+
+        <form action="#">
+            <legend>meter</legend>
+            <meter value="45" min="5" max="100" high="70" low="20">45 pounds</meter>
+            <meter value="10" min="5" max="100" high="70" low="20">10 pounds</meter>
+            <meter value="75" min="5" max="100" high="70" low="20">75 pounds</meter>
+        </form>
+
+        <legend>contenteditable</legend>
+        <p contenteditable>You can edit this text,if you would like.</p>
+
+        <legend>designMode</legend>
+        <iframe id="pageEditor" src="tags.html" frameborder="0" width="100%" height="200"></iframe>
+        <button onclick="startEdit()" class="btn btn-info">Start Editing</button>
+        <button onclick="stopEdit()" class="btn btn-default">Stop Editing</button>
+
+        <script>
+        function startEdit(){
+            // 将<iframe>转换为设计模式
+            var editor = document.getElementById('pageEditor');
+            editor.contentWindow.document.designMode = "on";
+        }
+        function stopEdit(){
+            // 关闭<iframe>的设计模式
+            var editor = document.getElementById('pageEditor');
+            editor.contentWindow.document.designMode = "off";
+        }
+        </script>
+
+    </div>
+</body>
+</html>

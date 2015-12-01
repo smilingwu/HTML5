@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="" />
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 使用html5垫片 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+    <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+
+        <div class="container">
+            <p></p>
+            <form action="" method="POST" role="form">
+                <legend>localStorage</legend>
+
+                <div class="form-group">
+                    <label for="">user name</label>
+                    <input type="text" class="form-control" id="userName">
+                </div>
+                <div class="form-group">
+                    <label for="">localStorage.getItem(keyName)</label>
+                    <input type="text" class="form-control" id="userNameOutput">
+                </div>
+
+                <button id="userNameBtn" type="button" class="btn btn-primary">localStorage.getItem(keyName)</button>
+            </form>
+            <script>
+                $(function(){
+                    $('#userNameBtn').click(function() {
+                        var nameInput = $('#userName');
+                        localStorage.setItem('user_name',nameInput.val());
+                        if (localStorage.getItem('user_name') == "") {
+                            alert("You haven't entered a name yet.");
+                        } else {
+                            $('#userNameOutput').val(localStorage.getItem('user_name'));
+                        }
+                    });
+                })
+            </script>
+
+            <h1></h1>
+
+            <form action="" method="POST" role="form">
+                <legend>localStorage 与 sessionStorage 存储区别</legend>
+
+                <div class="form-group">
+                    <label for="">localStorage 长期存在</label>
+                    <input type="text" class="form-control" id="localStorage">
+                </div>
+                <div class="form-group">
+                    <label for="">sessionStorage 关闭浏览器后消失</label>
+                    <input type="text" class="form-control" id="sessionStorage">
+                </div>
+
+                <button id="save_btn" type="button" class="btn btn-primary">Save Data</button>
+                <button id="load_btn" type="button" class="btn btn-primary">Load Data</button>
+            </form>
+            <script>
+                $(function(){
+                    var today = new Date();
+                    var time = today.getHours() + ":" + today.getMinutes();
+                    $('#save_btn').click(function() {
+                        localStorage.setItem('lastUpdateTiem',time);
+                        sessionStorage.setItem('lastUpdateTiem',time);
+
+                    });
+                    $('#load_btn').click(function() {
+                        $('#localStorage').val(localStorage.getItem('lastUpdateTiem'));
+                        $('#sessionStorage').val(sessionStorage.getItem('lastUpdateTiem'));
+
+                    });
+                })
+            </script>
+
+            <h1></h1>
+            <legend>删除数据项</legend>
+            <h4>localStorage.removeItem(keyName)</h4>
+            <h4>sessionStorage.clear()</h4>
+
+            <h1></h1>
+            <legend>查找所有数据项</legend>
+            <button id="findAllItems" class="btn btn-primary" onclick="findAllItems()">查找所有数据项</button>
+            <p></p>
+            <ul id="itemList"></ul>
+            <script>
+            function findAllItems() {
+                var itemList = $('#itemList');
+
+                itemList.html("");
+
+                for( var i=0;i<localStorage.length;i++) {
+                    var key = localStorage.key(i);
+
+                    var item = localStorage.getItem(key);
+
+                    var newItem = '<li>'+key+':'+item+'</li>';
+                    itemList.append(newItem);
+                }
+
+            }
+            </script>
+
+            <h1></h1>
+            <legend>保存数值和日期</legend>
+            <p>使用Number()函数</p>
+            <h4> var Number(localStorage.getItem(keyName));</h4>
+            <h1></h1>
+            <p>保存日期</p>
+            <button id="btn_3" class="btn btn-primary">重新获取日期年份</button>
+            <script>
+                $(function(){
+                    var today = new Date();
+                    var todayString = today.getFullYear()+"/"+today.getMonth()+"/"+today.getDate();
+                    sessionStorage.setItem('session_start',todayString);
+
+                    today = new Date(sessionStorage.getItem('session_start'));
+
+                    $('#btn_3').click(function() {
+                        alert(today.getFullYear());
+                    });
+                })
+            </script>
+
+            <h1></h1>
+            <legend>保存对象</legend>
+            <p id="score"></p>
+            <script>
+                $(function(){
+                    var score = new PersonalityScore(10,9,8,7,6);
+                    sessionStorage.setItem("PersonalityScore",JSON.stringify(score));
+                    var score_2 = sessionStorage.getItem('PersonalityScore');
+                    $('#score').html(score_2);
+
+                });
+                function PersonalityScore(o,c,e,a,n) {
+                    this.openness = o;
+                    this.conscientiousness = c;
+                    this.extraversion = e;
+                    this.agreeableness = a;
+                    this.neuroticism = n;
+                }
+            </script>
+
+        </div>
+</body>
+</html>

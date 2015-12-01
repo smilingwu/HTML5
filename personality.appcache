@@ -1,0 +1,39 @@
+CACHE MANIFEST
+
+# ver 1.0.0
+PersonalityTest.html
+PersonalityTest_Score.html
+
+# styles
+PersonalityTest.css
+PersonalityTest_Score.css
+
+# scripts
+PersonalityTest.js
+PersonalityTest_Score.js
+
+# images
+/images/img.png
+
+
+#必须在线访问
+NETWORK:
+
+#所有未缓存的内容都必须联网访问
+*
+
+#列出单个文件
+images/img.png
+
+
+FALLBACK:
+
+#在线使用的文件 离线后备文件
+a.html b.html
+
+#对任何不在缓存中的文件使用后备文件
+/ offline.html
+
+#在线检测
+
+online.js offline.js

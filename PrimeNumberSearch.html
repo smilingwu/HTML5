@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)http://prosetech.com/html5/Chapter%2013/PrimeNumberSearch_Blocking.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Prime Number Search</title>
+<style>
+body { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; margin: 20px ;}
+#primeContainer { border: solid 1px black; padding: 3px; height: 300px; max-width: 500px; overflow: scroll; overflow-x: hidden; font-size: x-small; margin-top: 20px; margin-bottom: 10px ;}
+input { width: 50px ;}
+button { padding: 3px; }
+p { margin-bottom: 3px ;}
+</style>
+
+<script>
+
+function findPrimes(fromNumber, toNumber) {
+
+  // Create an array containing all integers between the two specified numbers.
+  var list = [];
+  for (var i=fromNumber; i<=toNumber; i++) {
+    if (i>1) list.push(i);
+  }
+
+
+  // Test for primes.
+  var maxDiv = Math.round(Math.sqrt(toNumber));
+  var primes = [];
+
+  for (var i=0; i<list.length; i++) {
+    var failed = false;
+    for (var j=2; j<=maxDiv; j++) {
+      if ((list[i] != j) && (list[i] % j == 0)) {
+        failed = true;
+      } else if ((j==maxDiv) && (failed == false)) {
+        primes.push(list[i]);
+      }
+    }
+  }
+
+  return primes;
+}
+
+function doSearch() {
+  var fromNumber = document.getElementById("from").value;
+  var toNumber = document.getElementById("to").value;
+
+  var primes = findPrimes(fromNumber, toNumber);
+
+  var primeList = "";
+  for (var i=0; i<primes.length; i++) {
+    primeList += primes[i];
+    if (i != primes.length-1) primeList += ", ";
+  }
+  var primeContainer = document.getElementById("primeContainer");
+  primeContainer.innerHTML = primeList;
+
+  var statusDisplay = document.getElementById("status");
+  if (primeList.length == 0) {
+    statusDisplay.innerHTML = "Search failed to find any results.";
+  }
+  else {
+    statusDisplay.innerHTML = "The results are here!";
+  }
+}
+</script>
+</head>
+
+<body>
+  <p>Do a prime number search from <input id="from" value="1"> to <input id="to" value="200000">.</p>
+  <button onclick="doSearch()">Start Searching</button>
+
+  <div id="primeContainer">
+  </div>
+
+  <div id="status"></div>
+
+
+</body></html>
